@@ -3,13 +3,13 @@
 ## Før I begynder at kode
 | Spørgsmål                         | Gruppens Beslutning |
 |-----------------------------------|---------------------|
-| Hvilke filer skal projektet have? |                     |
-| Hvor håndteres routes?            |                     |
-| Hvor anvendes async/await?        |                     |
-| Hvor håndteres fejl?              |                     |
-| Hvilket event skal udsendes?      |                     |
-| Hvad skal loggen indeholde?       |                     |
-| Hvordan vil i teste fejlforløbet? |                     |
+| Hvilke filer skal projektet have? | `server.js`, `logger.js`, `klient - et eller andet?` |
+| Hvor håndteres routes?            |   `server.js`             |
+| Hvor anvendes async/await?        | Anvendes til filhåndtering i forbindelse med /read-file & /write-file endpoints                    |
+| Hvor håndteres fejl?              | Asynkron kode (vores to endpoints /read-file & /write-file)       |
+| Hvilket event skal udsendes?      | log event         |
+| Hvad skal loggen indeholde?       | GET /read file, POST /write-file              |
+| Hvordan vil i teste fejlforløbet? | Manuel test, brug af Postman / Browser               |
 
 ## Hvad laver programmet?
 Beskriv kort serveren.
