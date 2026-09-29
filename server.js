@@ -4,6 +4,8 @@ const path = require('node:path');
 
 const app = express();
 
+app.use(express.json());
+
 const PORT = 3000;
 
 const filePath = path.join(
@@ -21,20 +23,21 @@ app.get('/read-file', async (req, res) => {
         return res.status(200).send(fileContent);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Something went wrong' });
+        return res.status(500).json({ error: 'Unable to read file' });
     }
 });
 
 app.post('/write-file', async (req, res) => {
-    const content = "Hello, this is a test content for the ninja.txt file.";
+    const content = req.body?.content;
+
     try {
         await fs.mkdir(path.dirname(filePath), { recursive: true });
         await fs.writeFile(filePath, content, 'utf8');
 
-        res.status(201).send('File written successfully');
+        res.status(201).json({ message: 'File written successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).send(JSON.stringify({ error: 'Something went wrong' }));
+        return res.status(500).json({ error: 'Somthing went wrong' });
     }
 });
 
