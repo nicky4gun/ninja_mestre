@@ -11,8 +11,8 @@ const PORT = 3000;
 
 const filePath = path.join(
     __dirname,
-    './data/ninja.txt'
-)
+    '../data/ninja.txt'
+);
 
 app.get('/', (req, res) => {
     res.send('Serveren Kører');
@@ -22,11 +22,11 @@ app.get('/read-file', async (req, res) => {
     try {
         const fileContent = await fs.readFile(filePath, 'utf8');
         logger.log('File content read successfully');
-        return res.status(200).send(fileContent);
+        res.status(200).send(fileContent);
     } catch (error) {
         logger.log('Error reading file');
         console.error(error);
-        return res.status(500).json({ error: 'Unable to read file' });
+        res.status(500).json({ error: 'Unable to read file' });
     }
 });
 
@@ -35,7 +35,6 @@ app.post('/write-file', async (req, res) => {
 
     try {
         logger.log('Writing to file...')
-        await fs.mkdir(path.dirname(filePath), { recursive: true });
         await fs.writeFile(filePath, content, 'utf8');
 
         logger.log('File written successfully');
@@ -43,7 +42,7 @@ app.post('/write-file', async (req, res) => {
     } catch (error) {
         logger.log('Error writing file');
         console.error(error);
-        return res.status(500).json({ error: 'Somthing went wrong' });
+        res.status(500).json({ error: 'Something went wrong' });
     }
 });
 
