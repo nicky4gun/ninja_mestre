@@ -3,8 +3,8 @@
 ## Før I begynder at kode
 | Spørgsmål                         | Gruppens Beslutning                                                             |
 |-----------------------------------|---------------------------------------------------------------------------------|
-| Hvilke filer skal projektet have? | `src/server.js`, `src/logger.js`                                                |
-| Hvor håndteres routes?            | `src/server.js`                                                                 |
+| Hvilke filer skal projektet have? | `server.js`, `logger.js`                                                |
+| Hvor håndteres routes?            | `server.js`                                                                 |
 | Hvor anvendes async/await?        | Anvendes til filhåndtering i forbindelse med /read-file & /write-file endpoints |
 | Hvor håndteres fejl?              | Asynkron kode (vores to endpoints /read-file & /write-file)                     |
 | Hvilket event skal udsendes?      | log event                                                                       |
