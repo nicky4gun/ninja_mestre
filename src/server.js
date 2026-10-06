@@ -6,9 +6,10 @@ const path = require('node:path');
 const logger = require('./utils/logger.js');
 
 const app = express();
-const PORT = process.env.PORTc || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(logger.requestLogger);
 
 const filePath = path.join(
     __dirname,

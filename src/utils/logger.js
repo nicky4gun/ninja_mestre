@@ -4,13 +4,13 @@ const path = require('node:path');
 
 const filePath = path.join(
     __dirname,
-    '../data/log.txt'
+    '../../data/log.txt'
 );
 
 const eventEmitter = new EventEmitter();
 
 eventEmitter.on('logMessage', (message) => {
-    console.log(message);
+    console.log(`${new Date().toISOString()} - ` + message);
 });
 
 eventEmitter.on('logMessage', async (message) => {
@@ -26,4 +26,17 @@ function log(message) {
     eventEmitter.emit('logMessage', message);
 }
 
-module.exports = { log };
+function requestLogger(req, res, next) {
+    res.on('finish', () => {
+        log(
+            `${req.method} ${req.originalUrl} - ${res.statusCode}`
+        )
+    });
+
+    next();
+}
+
+module.exports = {
+    log,
+    requestLogger
+};
