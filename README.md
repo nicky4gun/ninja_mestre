@@ -23,13 +23,15 @@ Programmet er en simpel Node.js server, der kan håndtere filoperationer. Den ha
 ## Asykronitet
 Forklar med egne ord:
 
-Hvad sker der i Node.js, mens serveren venter på en filoperation?
+**Hvad sker der i Node.js, mens serveren venter på en filoperation?**
+
 I Node.js, når serveren venter på en filoperation, bliver den ikke blokeret. I stedet for at vente på, at operationen er færdig, kan serveren fortsætte med at håndtere andre forespørgsler. Dette gør Node.js meget effektivt til håndtering af mange samtidige forbindelser.
 
 ## EventEmitter
 Forklar:
 
 **Hvilket event bruger I, og hvornår bliver det udsendt?**
+
 Vi bruger et "log" event, som bliver udsendt hver gang der sker en filoperation, enten ved at læse eller skrive til en fil. Dette event kan bruges til at logge aktiviteten i serveren og spore eventuelle fejl.
 
 ## Test
