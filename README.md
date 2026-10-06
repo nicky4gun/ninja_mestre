@@ -3,8 +3,8 @@
 ## Før I begynder at kode
 | Spørgsmål                         | Gruppens Beslutning                                                             |
 |-----------------------------------|---------------------------------------------------------------------------------|
-| Hvilke filer skal projektet have? | `server.js`, `logger.js`                                                |
-| Hvor håndteres routes?            | `server.js`                                                                 |
+| Hvilke filer skal projektet have? | `server.js`, `logger.js`                                                        |
+| Hvor håndteres routes?            | `server.js`                                                                     |
 | Hvor anvendes async/await?        | Anvendes til filhåndtering i forbindelse med /read-file & /write-file endpoints |
 | Hvor håndteres fejl?              | Asynkron kode (vores to endpoints /read-file & /write-file)                     |
 | Hvilket event skal udsendes?      | log event                                                                       |
@@ -67,14 +67,49 @@ For at gøre logging persistent kunne vi ændre vores log event handler til at s
 
 Ja, denne løsning kan skaleres til 1000 klienter, da Node.js er designet til at håndtere mange samtidige forbindelser effektivt. Den asynkrone natur af Node.js gør det muligt for serveren at håndtere mange forespørgsler uden at blive blokeret.
 
+## Individuelt checkpoint
+**Hvor anvendes async/await?**
+
+Await anvedes i vores to endpoints /read-file & /write-file til at håndtere asynkrone filoperationer.
+Async bruges i vores to endpoints /read-file og /write-file for at markere dem som asynkrone funktioner, hvilket gør der muligt at bruge await inde for disse funktioner.
+
+**Hvad sker der ved await?**
+
+Når serveren når en await, stopper den midlertidigt udførelsen af den aktuelle funktion, indtil den asynkrone metode er fuldføret.
+
+**Hvor håndteres fejl?**
+
+Fejl håndteres i to endoponts /read-file og /write-file ved brug af try/catch blokke, som fanger fejl. Men også steder hvor især de asynkrone metoder med sikkerhed kan give fejl, f.eks. i forbindelse med logging til fil i loggeren.
+
+**Hvordan fungerer jeres EventEmitter?**
+
+Eventemitteren udsender et log event hver gange der sker en filoprettelse eller filskrivning. Dette event kan bruges til at logge aktiviteten i serveren og spore eventuelle fejl. Fungere lidt på samme måde som en server listener i Java. Den lytter på om noget skal logges og hvis det skal, skriver den i vores tilfælde log-beskeden både til console og `log.txt`.
+
+**Hvad sker der, når flere requests kommer tæt efter hinanden?**
+
+De kommer på en gang men måske ikke i  rekkefølge, men serveren håndterer dem stadigt, da den asynkrone natur af Node.js gør det muligt for serveren at håndtere mange forespørgsler uden at blive blokeret.
+
+
+**Hvad har AI-agenten bidraget med?**
+
+Vi har ikke brugt Agentic Ai agenten i denne opgave, da vi har valgt at lære Node.js på egen hånd uden hjælp fra AI. 
+men hvad vi har brugt af ai er:
+
+Primært til spørgsmål, hvis der var noget vi ikke forstod, f.eks.:
+- Hvorfor får jeg / hvad betyder denne fejl?
+- Foklar meningen med next() - metoden
+
+**Hvordan kontrollerede I agentens ændringer?**
+
+Dette gjorde vi ikke, da AI ikke har været brugt i forbindelse med Agentic Coding i denne opgave.
+
+
+### **Udvidelser: Timestamp til log, Logging til fil og Simpel validering af input ({ error: 'Content is required' })**
+
 ## Afslutning
 Den vigtigste forskel mellem den måde, vi håndterede samtidighed på i vores Java-server, og den måde Node.js-serveren arbejder på, er 
 den asynkrone natur af Node.js. I Java-serveren blev samtidige forespørgsler håndteret ved hjælp af tråde, hvilket kan føre til højere ressourceforbrug og kompleksitet. I Node.js håndteres samtidige forespørgsler ved hjælp af en event-loop og asynkrone operationer, hvilket gør det mere effektivt og skalerbart.
 
 
-## Der er ikke gjort brug af ai
-Vi ved godt at man må bruge ai til denne opgave, men vi har valgt ikke at gøre brug af det idenne opgave da vi ikke har flere criditter 
-men det en god ting fordi at nodes.js er et nyt værktøj for os og vi vil gerne lære det på egen hånd.  så vi kan få en bedre forståelse af Node.js og dens funktioner.
 
-Det gør også at vi ikke behøver at bekymre os om at skulle forklare hvordan vi har brugt ai i vores kode, da vi ikke har brugt det.
  
